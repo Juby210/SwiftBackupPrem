@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
     id("com.android.application")
 }
@@ -11,8 +13,8 @@ android {
         applicationId = "io.github.juby210.swiftbackupprem"
         minSdk = 27
         targetSdk = 33
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.1.0"
     }
 
     buildTypes {
@@ -29,6 +31,10 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+    buildFeatures {
+        buildConfig = false
+        resValues = false
     }
 }
 
