@@ -1,6 +1,6 @@
 # SwiftBackupPrem
 Swift Backup Premium LSPosed module (tested on v4.2.3).
 
-Bypasses google account login requirement to allow user to create cloud backups.
+Allows you to set your own firebase credentials, so only your firebase instance is used.
 
-It is highly suggested not to log in into your google account (especially when google drive sync isn't needed) because it can can lead into getting banned by developer via firebase.
+It is highly recommened to set your own firebase credentials, because the developer can ban you from accessing original app using his firebase instance. 

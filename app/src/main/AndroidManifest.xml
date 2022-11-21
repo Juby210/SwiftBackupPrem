@@ -3,11 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:icon="@mipmap/ic_launcher"
         android:label="SwiftBackupPrem"
         android:supportsRtl="true"
         android:multiArch="true"
         android:extractNativeLibs="false"
         tools:ignore="MissingApplicationIcon">
+        <activity android:name=".MainActivity" android:exported="true" android:theme="@android:style/Theme.Material.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <meta-data
             android:name="xposedmodule"
             android:value="true" />
@@ -16,7 +25,10 @@
             android:value="Swift Backup Premium (tested on v4.2.3)" />
         <meta-data
             android:name="xposedminversion"
-            android:value="90" />
+            android:value="93" />
+        <meta-data
+            android:name="xposedsharedprefs"
+            android:value="true" />
         <meta-data
             android:name="xposedscope"
             android:value="org.swiftapps.swiftbackup" />
