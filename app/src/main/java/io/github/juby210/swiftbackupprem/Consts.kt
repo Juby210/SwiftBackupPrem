@@ -7,4 +7,7 @@ object Consts {
     const val gcmDefaultSenderId = "gcm_defaultSenderId"
     const val googleStorageBucket = "google_storage_bucket"
     const val projectId = "project_id"
+
+    @JvmStatic
+    val classNames = mapOf(561 to "kf.s0", 569 to "rf.r0")
 }

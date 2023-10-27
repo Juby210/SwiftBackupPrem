@@ -14,8 +14,8 @@ android {
         applicationId = "io.github.juby210.swiftbackupprem"
         minSdk = 27
         targetSdk = 34
-        versionCode = 200
-        versionName = "2.0.0"
+        versionCode = 201
+        versionName = "2.0.1"
     }
 
     buildTypes {
@@ -50,6 +50,7 @@ android {
 
 dependencies {
     compileOnly("de.robv.android.xposed:api:82")
+    implementation("org.luckypray:dexkit:2.0.0-rc7")
 
     // AndroidX
     implementation("androidx.core:core-ktx:1.12.0")

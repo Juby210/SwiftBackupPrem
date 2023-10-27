@@ -1,5 +1,5 @@
 # SwiftBackupPrem
-Swift Backup Premium LSPosed module (tested on v4.2.3).
+Swift Backup Premium LSPosed module (tested on v4.2.3 and v4.2.5, but should also work on newer versions - thanks to [DexKit](https://github.com/LuckyPray/DexKit)).
 
 Optionally also allows you to set your own firebase credentials, so only your firebase instance is used.
 
