@@ -22,7 +22,7 @@
             android:value="true" />
         <meta-data
             android:name="xposeddescription"
-            android:value="Swift Backup Premium (tested on v4.2.3)" />
+            android:value="Swift Backup Premium" />
         <meta-data
             android:name="xposedminversion"
             android:value="93" />

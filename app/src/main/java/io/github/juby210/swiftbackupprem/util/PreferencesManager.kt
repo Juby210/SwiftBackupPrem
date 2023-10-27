@@ -13,7 +13,6 @@ class PreferencesManager(private val prefs: SharedPreferences) {
         getter: (key: String, defaultValue: T) -> T,
         private val setter: (key: String, newValue: T) -> Unit
     ) {
-        @Suppress("RedundantSetter")
         var value by mutableStateOf(getter(key, defaultValue))
             private set
 
