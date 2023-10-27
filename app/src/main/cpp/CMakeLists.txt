@@ -21,6 +21,6 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        nativelib.cpp)
+        nativelib.c)
 
 target_link_libraries(nativelib)
