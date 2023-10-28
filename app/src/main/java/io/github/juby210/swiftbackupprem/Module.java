@@ -104,7 +104,7 @@ public final class Module implements IXposedHookLoadPackage {
                     if (classClientId != null) {
                         XposedBridge.hookMethod(classClientId.getDeclaredMethod("f", boolean.class), new XC_MethodHook() {
                             public void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                                var clientId = c.getDeclaredField("c");
+                                var clientId = classClientId.getDeclaredField("c");
                                 clientId.setAccessible(true);
                                 clientId.set(null, prefs.getClientId());
                             }
