@@ -14,8 +14,8 @@ android {
         applicationId = "io.github.juby210.swiftbackupprem"
         minSdk = 27
         targetSdk = 34
-        versionCode = 202
-        versionName = "2.0.2"
+        versionCode = 203
+        versionName = "2.0.3"
     }
 
     buildTypes {

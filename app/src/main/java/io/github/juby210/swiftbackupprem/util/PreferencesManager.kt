@@ -54,7 +54,7 @@ class PreferencesManager(private val prefs: SharedPreferences) {
     var gcmDefaultSenderId by stringPreference(Consts.gcmDefaultSenderId)
     var googleStorageBucket by stringPreference(Consts.googleStorageBucket)
     var projectId by stringPreference(Consts.projectId)
-    var clientId by stringPreference("oauth_client_id")
+    var clientId by stringPreference(Consts.oauthClientId)
 
     var customFirebaseApp by booleanPreference("custom_firebase_app")
 }
