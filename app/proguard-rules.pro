@@ -12,3 +12,6 @@
 -allowaccessmodification
 
 -keep class io.github.juby210.swiftbackupprem.Module { *; }
+-keep class io.github.juby210.swiftbackupprem.DexKit {
+    public final void findObfuscatedClasses(android.content.Context, java.lang.ClassLoader, java.lang.String);
+}

@@ -1,5 +1,6 @@
 package io.github.juby210.swiftbackupprem
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -25,12 +26,14 @@ import org.json.JSONObject
 import kotlin.system.exitProcess
 
 class MainActivity : ComponentActivity() {
+    @SuppressLint("WorldReadableFiles")
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val prefs: PreferencesManager
         try {
+            @Suppress("DEPRECATION")
             prefs = PreferencesManager(getSharedPreferences(BuildConfig.APPLICATION_ID + "_preferences", MODE_WORLD_READABLE))
         } catch (e: Throwable) {
             Toast.makeText(this, "Enable module in LSPosed manager before using it", Toast.LENGTH_SHORT).show()
@@ -105,8 +108,9 @@ class MainActivity : ComponentActivity() {
                                                     firebaseDatabaseUrl = getString("firebase_url")
                                                     gcmDefaultSenderId = getString("project_number")
                                                     googleStorageBucket = getString("storage_bucket")
-                                                    projectId = getString("project_id")
+                                                    projectId = getString(Consts.projectId)
                                                 }
+                                                if (json.has(Consts.oauthClientId)) clientId = json.getString(Consts.oauthClientId)
                                             }
                                         } catch (e: Throwable) {
                                             Toast.makeText(this@MainActivity, "Failed to parse json\n$e", Toast.LENGTH_LONG).show()
@@ -161,7 +165,7 @@ class MainActivity : ComponentActivity() {
                             }
 
                             Button(
-                                onClick = { clip.setText(AnnotatedString("org.swiftapps.swiftbackup")) },
+                                onClick = { clip.setText(AnnotatedString(Consts.packageName)) },
                                 modifier = Modifier.padding(horizontal = 15.dp, vertical = 5.dp).fillMaxWidth().height(40.dp)
                             ) {
                                 Text("Copy Swift Backup package name")
