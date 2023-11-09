@@ -10,3 +10,7 @@ Step-by-step setup for your own firebase instance:
 
 https://user-images.githubusercontent.com/31005896/203136303-36079018-3199-4863-864b-40293342f262.mp4
 
+
+Since October 2023 Google disabled Custom URI schemes by default for new projects. Check `Enable custom URI scheme` while creating Android OAuth client (~3:36 on guide video).
+
+![image](https://github.com/Juby210/SwiftBackupPrem/assets/31005896/8049f7e2-26db-418b-9611-171be77b61f1)
