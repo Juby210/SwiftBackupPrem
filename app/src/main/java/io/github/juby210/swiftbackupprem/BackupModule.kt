@@ -7,14 +7,13 @@ import io.github.juby210.swiftbackupprem.util.PreferencesManager
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
-import java.lang.reflect.Modifier
 
 fun hookBackupApk(cl: ClassLoader, ctx: Context, customFirebaseApp: Boolean, prefs: PreferencesManager) {
     val pathsA = cl.loadClass("${paths!!.name}\$a")
     XposedBridge.hookMethod(backupApk!!.getDeclaredMethod("c"), object : XC_MethodHook() {
         override fun afterHookedMethod(param: MethodHookParam) {
             val pathsClass = paths!!
-            val aInstance = pathsClass.getDeclaredField("y").get(null)
+            val aInstance = pathsClass.declaredFields.first { it.type == pathsA }.get(null)
             val instance = pathsA.getDeclaredMethod("d").invoke(aInstance)
             val basePath = pathsClass.getDeclaredMethod("m").invoke(instance) as String
 

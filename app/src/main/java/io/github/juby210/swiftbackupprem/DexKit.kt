@@ -6,12 +6,11 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import org.luckypray.dexkit.DexKitBridge
-import org.luckypray.dexkit.query.matchers.*
 import java.lang.reflect.Modifier
 
-private val classesClientId = mapOf(561 to "kf.s0", 569 to "rf.r0")
-private val classesBackupApk = mapOf(561 to "org.swiftapps.swiftbackup.common.w1", 569 to "org.swiftapps.swiftbackup.common.n2")
-private val classesPaths = mapOf(561 to "me.b", 569 to "te.c")
+private val classesClientId = mapOf(561 to "kf.s0", 569 to "rf.r0", 590 to "eh.u")
+private val classesBackupApk = mapOf(561 to "org.swiftapps.swiftbackup.common.w1", 569 to "org.swiftapps.swiftbackup.common.n2", 590 to "org.swiftapps.swiftbackup.common.c2")
+private val classesPaths = mapOf(561 to "me.b", 569 to "te.c", 590 to "org.swiftapps.swiftbackup.a")
 
 @JvmField
 var clientId: Class<*>? = null
@@ -30,8 +29,8 @@ fun findObfuscatedClasses(ctx: Context, cl: ClassLoader, sourceDir: String) {
     } else {
         System.loadLibrary("dexkit")
         val excludePackages = listOf("android", "androidx", "com", "iammert", "java", "javax", "kotlin", "kotlinx", "moe", "nz.mega",
-            "okhttp3", "okio", "org", "retrofit", "rikka")
-        DexKitBridge.create(sourceDir)?.use { bridge ->
+            "okhttp3", "okio", "retrofit", "rikka")
+        DexKitBridge.create(sourceDir).use { bridge ->
             bridge.findClass {
                 excludePackages(excludePackages)
                 matcher {
@@ -63,7 +62,7 @@ fun findObfuscatedClasses(ctx: Context, cl: ClassLoader, sourceDir: String) {
                         addParamType("boolean")
                     }
                 }
-            }.firstOrNull()?.let {
+            }.singleOrNull()?.let {
                 clientId = it.getInstance(cl)
                 Log.d("SBP", "Found client id class: ${it.name}")
             }
@@ -83,7 +82,7 @@ fun findObfuscatedClasses(ctx: Context, cl: ClassLoader, sourceDir: String) {
                         usingStrings("stable", "swift_backup_apks/", "SwiftBackupApkSaver")
                     }
                 }
-            }.firstOrNull()?.let {
+            }.singleOrNull()?.let {
                 backupApk = it.getInstance(cl)
                 Log.d("SBP", "Found backup apk class: ${it.name}")
             }
@@ -107,7 +106,7 @@ fun findObfuscatedClasses(ctx: Context, cl: ClassLoader, sourceDir: String) {
                         }
                     }
                 }
-            }.firstOrNull()?.let {
+            }.singleOrNull()?.let {
                 paths = it.getInstance(cl)
                 Log.d("SBP", "Found paths class: ${it.name}")
             }
