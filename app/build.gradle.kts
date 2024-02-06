@@ -14,8 +14,8 @@ android {
         applicationId = "io.github.juby210.swiftbackupprem"
         minSdk = 27
         targetSdk = 34
-        versionCode = 203
-        versionName = "2.0.3"
+        versionCode = 204
+        versionName = "2.0.4"
     }
 
     buildTypes {
@@ -40,7 +40,7 @@ android {
         compose = true
         resValues = false
     }
-    composeOptions.kotlinCompilerExtensionVersion = "1.5.3"
+    composeOptions.kotlinCompilerExtensionVersion = "1.5.8"
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions {
             jvmTarget = "11"
@@ -50,18 +50,15 @@ android {
 
 dependencies {
     compileOnly("de.robv.android.xposed:api:82")
-    implementation("org.luckypray:dexkit:2.0.0-rc7")
+    implementation("org.luckypray:dexkit:2.0.0")
 
     // AndroidX
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.activity:activity-compose:1.8.0")
+    implementation("androidx.activity:activity-compose:1.8.2")
 
     // Compose
-    val composeVersion = "1.5.4"
+    val composeVersion = "1.6.0"
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling:$composeVersion")
     implementation("androidx.compose.material3:material3:1.1.2")
-
-    // Accompanist
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
 }
