@@ -6,9 +6,11 @@
 
 static HookFunType hook_func = NULL;
 
-jint (*backup)(JavaVM *, void *);
+jint (*backup)(JavaVM *vm, void *reserved);
 
-jint fakeLoad(JavaVM *, void *) {
+jint fakeLoad(JavaVM *vm, void *reserved) {
+    (void) vm;
+    (void) reserved;
     return JNI_VERSION_1_6;
 }
 
@@ -20,13 +22,16 @@ bool ends_with(const char *a, const char *b) {
 }
 
 void on_library_loaded(const char *name, void *handle) {
-    if (ends_with(name, "libnative-lib.so")) {
+    if (name && hook_func && ends_with(name, "libnative-lib.so")) {
         void *target = dlsym(handle, "JNI_OnLoad");
-        hook_func(target, (void *) fakeLoad, (void **) &backup);
+        if (target) {
+            hook_func(target, (void *) fakeLoad, (void **) &backup);
+        }
     }
 }
 
 NativeOnModuleLoaded native_init(const NativeAPIEntries *entries) {
+    if (!entries) return NULL;
     hook_func = entries->hook_func;
     return on_library_loaded;
 }

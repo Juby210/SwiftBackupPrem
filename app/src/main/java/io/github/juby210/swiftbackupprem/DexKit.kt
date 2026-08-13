@@ -4,34 +4,42 @@ package io.github.juby210.swiftbackupprem
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import org.luckypray.dexkit.DexKitBridge
 import java.lang.reflect.Modifier
 
-private val classesClientId = mapOf(561 to "kf.s0", 569 to "rf.r0", 590 to "eh.u")
-private val classesBackupApk = mapOf(561 to "org.swiftapps.swiftbackup.common.w1", 569 to "org.swiftapps.swiftbackup.common.n2", 590 to "org.swiftapps.swiftbackup.common.c2")
-private val classesPaths = mapOf(561 to "me.b", 569 to "te.c", 590 to "org.swiftapps.swiftbackup.a")
+private val classesClientId = mapOf(561 to "kf.s0", 569 to "rf.r0", 590 to "eh.u", 620 to "defpackage.gn5")
+private val classesBackupApk = mapOf(561 to "org.swiftapps.swiftbackup.common.w1", 569 to "org.swiftapps.swiftbackup.common.n2", 590 to "org.swiftapps.swiftbackup.common.c2", 620 to "defpackage.qm")
+private val classesPaths = mapOf(561 to "me.b", 569 to "te.c", 590 to "org.swiftapps.swiftbackup.a", 620 to "defpackage.ry5")
 
 @JvmField
-var clientId: Class<*>? = null
+var clientIdClass: Class<*>? = null
 @JvmField
-var backupApk: Class<*>? = null
+var backupApkClass: Class<*>? = null
 @JvmField
-var paths: Class<*>? = null
+var pathsClass: Class<*>? = null
 
 @Suppress("DEPRECATION")
 fun findObfuscatedClasses(ctx: Context, cl: ClassLoader, sourceDir: String) {
     val ver = Integer.valueOf(ctx.packageManager.getPackageInfo(Consts.packageName, 0).versionCode)
     if (classesClientId.containsKey(ver)) {
-        clientId = cl.loadClass(classesClientId[ver])
-        backupApk = cl.loadClass(classesBackupApk[ver])
-        paths = cl.loadClass(classesPaths[ver])
+        clientIdClass = cl.loadClass(classesClientId[ver])
+        backupApkClass = cl.loadClass(classesBackupApk[ver])
+        pathsClass = cl.loadClass(classesPaths[ver])
     } else {
-        System.loadLibrary("dexkit")
+        try {
+            System.loadLibrary("dexkit")
+        } catch (t: Throwable) {
+            Log.e("SBP", "Failed loading dexkit library", t)
+        }
         val excludePackages = listOf("android", "androidx", "com", "iammert", "java", "javax", "kotlin", "kotlinx", "moe", "nz.mega",
             "okhttp3", "okio", "retrofit", "rikka")
         DexKitBridge.create(sourceDir).use { bridge ->
-            bridge.findClass {
+            (bridge.findClass {
+                excludePackages(excludePackages)
+                matcher {
+                    usingStrings("org.swiftapps.swiftbackup:/oauth")
+                }
+            }.firstOrNull() ?: bridge.findClass {
                 excludePackages(excludePackages)
                 matcher {
                     fields {
@@ -62,32 +70,21 @@ fun findObfuscatedClasses(ctx: Context, cl: ClassLoader, sourceDir: String) {
                         addParamType("boolean")
                     }
                 }
-            }.singleOrNull()?.let {
-                clientId = it.getInstance(cl)
+            }.singleOrNull())?.let {
+                clientIdClass = it.getInstance(cl)
                 Log.d("SBP", "Found client id class: ${it.name}")
             }
 
-            bridge.findClass {
-                searchPackages("org.swiftapps.swiftbackup.common")
+            (bridge.findClass {
                 matcher {
-                    fields {
-                        addForName("a")
-                        count(1)
-                    }
-                    addMethod {
-                        modifiers(Modifier.PRIVATE or Modifier.FINAL)
-                        returnType("void")
-                        name("c")
-                        paramCount(0)
-                        usingStrings("stable", "swift_backup_apks/", "SwiftBackupApkSaver")
-                    }
+                    usingStrings("swift_backup_apks/", "SwiftBackupApkSaver")
                 }
-            }.singleOrNull()?.let {
-                backupApk = it.getInstance(cl)
+            }.firstOrNull())?.let {
+                backupApkClass = it.getInstance(cl)
                 Log.d("SBP", "Found backup apk class: ${it.name}")
             }
 
-            bridge.findClass {
+            (bridge.findClass {
                 excludePackages(excludePackages)
                 matcher {
                     methods {
@@ -98,24 +95,16 @@ fun findObfuscatedClasses(ctx: Context, cl: ClassLoader, sourceDir: String) {
                             paramCount(2)
                             usingStrings("accounts/", "backups/", "cache/", "apps/", "local/", "cloud/", "icon_cache/", "sms/", "calls/")
                         }
-                        add {
-                            modifiers(Modifier.PUBLIC or Modifier.FINAL)
-                            returnType("java.lang.String")
-                            name("m")
-                            paramCount(0)
-                        }
                     }
                 }
-            }.singleOrNull()?.let {
-                paths = it.getInstance(cl)
+            }.singleOrNull())?.let {
+                pathsClass = it.getInstance(cl)
                 Log.d("SBP", "Found paths class: ${it.name}")
             }
         }
 
-        if (clientId == null || backupApk == null || paths == null) Toast.makeText(
-            ctx,
-            "[SBP] Couldn't fully hook Swift Backup. Check if there's module update or report an issue.",
-            Toast.LENGTH_LONG
-        ).show()
+        if (clientIdClass == null || backupApkClass == null || pathsClass == null) {
+            Log.w("SBP", "Couldn't fully hook Swift Backup.")
+        }
     }
 }
