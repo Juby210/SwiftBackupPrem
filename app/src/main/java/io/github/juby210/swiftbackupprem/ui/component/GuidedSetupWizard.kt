@@ -38,6 +38,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.juby210.swiftbackupprem.Consts
@@ -152,7 +153,8 @@ fun GuidedSetupWizard(
 
                     OutlinedButton(
                         onClick = { userOverrodeCollapse = false },
-                        modifier = Modifier.fillMaxWidth().height(42.dp)
+                        modifier = Modifier.fillMaxWidth().heightIn(min = 42.dp),
+                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Edit,
@@ -160,7 +162,7 @@ fun GuidedSetupWizard(
                             modifier = Modifier.size(18.dp)
                         )
                         Spacer(modifier = Modifier.width(6.dp))
-                        Text("Edit Setup")
+                        Text("Edit Setup", textAlign = TextAlign.Center, softWrap = true)
                     }
                 }
             }
@@ -328,10 +330,11 @@ private fun Step1WelcomeImport(
                 }
                 Button(
                     onClick = onNext,
-                    modifier = Modifier.fillMaxWidth().height(42.dp),
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 42.dp),
+                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
                 ) {
-                    Text("Start Setup", fontWeight = FontWeight.Bold)
+                    Text("Start Setup", fontWeight = FontWeight.Bold, textAlign = TextAlign.Center, softWrap = true)
                     Spacer(modifier = Modifier.width(6.dp))
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowForward,
@@ -384,7 +387,8 @@ private fun Step1WelcomeImport(
                 }
                 OutlinedButton(
                     onClick = onImportClick,
-                    modifier = Modifier.fillMaxWidth().height(42.dp)
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 42.dp),
+                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.UploadFile,
@@ -392,7 +396,7 @@ private fun Step1WelcomeImport(
                         modifier = Modifier.size(18.dp)
                     )
                     Spacer(modifier = Modifier.width(6.dp))
-                    Text("Import google-services.json")
+                    Text("Import google-services.json", textAlign = TextAlign.Center, softWrap = true)
                 }
             }
         }
@@ -409,23 +413,31 @@ private fun Step2Database(
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Button(onClick = onOpenConsole, modifier = Modifier.weight(1f).height(40.dp)) {
+            Button(
+                onClick = onOpenConsole,
+                modifier = Modifier.weight(1f).heightIn(min = 40.dp),
+                contentPadding = PaddingValues(horizontal = 6.dp, vertical = 6.dp)
+            ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.Launch,
                     contentDescription = null,
                     modifier = Modifier.size(16.dp)
                 )
                 Spacer(modifier = Modifier.width(4.dp))
-                Text("Open Console", fontSize = 13.sp)
+                Text("Open Console", fontSize = 13.sp, textAlign = TextAlign.Center, softWrap = true)
             }
-            OutlinedButton(onClick = onCopyRules, modifier = Modifier.weight(1f).height(40.dp)) {
+            OutlinedButton(
+                onClick = onCopyRules,
+                modifier = Modifier.weight(1f).heightIn(min = 40.dp),
+                contentPadding = PaddingValues(horizontal = 6.dp, vertical = 6.dp)
+            ) {
                 Icon(
                     imageVector = Icons.Default.ContentCopy,
                     contentDescription = null,
                     modifier = Modifier.size(16.dp)
                 )
                 Spacer(modifier = Modifier.width(4.dp))
-                Text("Copy Rules", fontSize = 13.sp)
+                Text("Copy Rules", fontSize = 13.sp, textAlign = TextAlign.Center, softWrap = true)
             }
         }
 
@@ -442,13 +454,21 @@ private fun Step2Database(
         )
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            OutlinedButton(onClick = onBack) {
+            OutlinedButton(
+                onClick = onBack,
+                modifier = Modifier.heightIn(min = 40.dp),
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+            ) {
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null, modifier = Modifier.size(18.dp))
                 Spacer(modifier = Modifier.width(4.dp))
-                Text("Back")
+                Text("Back", textAlign = TextAlign.Center, softWrap = true)
             }
-            Button(onClick = onNext) {
-                Text("Next")
+            Button(
+                onClick = onNext,
+                modifier = Modifier.heightIn(min = 40.dp),
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+            ) {
+                Text("Next", textAlign = TextAlign.Center, softWrap = true)
                 Spacer(modifier = Modifier.width(4.dp))
                 Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null, modifier = Modifier.size(18.dp))
             }
@@ -464,10 +484,14 @@ private fun Step3AuthAndStorage(
     onNext: () -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Button(onClick = onOpenConsole, modifier = Modifier.fillMaxWidth().height(40.dp)) {
+        Button(
+            onClick = onOpenConsole,
+            modifier = Modifier.fillMaxWidth().heightIn(min = 40.dp),
+            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+        ) {
             Icon(Icons.AutoMirrored.Filled.Launch, contentDescription = null, modifier = Modifier.size(18.dp))
             Spacer(modifier = Modifier.width(6.dp))
-            Text("Open Firebase Console")
+            Text("Open Firebase Console", textAlign = TextAlign.Center, softWrap = true)
         }
 
         SettingsTextField(
@@ -495,13 +519,21 @@ private fun Step3AuthAndStorage(
         )
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            OutlinedButton(onClick = onBack) {
+            OutlinedButton(
+                onClick = onBack,
+                modifier = Modifier.heightIn(min = 40.dp),
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+            ) {
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null, modifier = Modifier.size(18.dp))
                 Spacer(modifier = Modifier.width(4.dp))
-                Text("Back")
+                Text("Back", textAlign = TextAlign.Center, softWrap = true)
             }
-            Button(onClick = onNext) {
-                Text("Next")
+            Button(
+                onClick = onNext,
+                modifier = Modifier.heightIn(min = 40.dp),
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+            ) {
+                Text("Next", textAlign = TextAlign.Center, softWrap = true)
                 Spacer(modifier = Modifier.width(4.dp))
                 Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null, modifier = Modifier.size(18.dp))
             }
@@ -521,28 +553,44 @@ private fun Step4AndroidOAuth(
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            OutlinedButton(onClick = onCopyPackageName, modifier = Modifier.weight(1f).height(40.dp)) {
+            OutlinedButton(
+                onClick = onCopyPackageName,
+                modifier = Modifier.weight(1f).heightIn(min = 40.dp),
+                contentPadding = PaddingValues(horizontal = 6.dp, vertical = 6.dp)
+            ) {
                 Icon(Icons.Default.ContentCopy, contentDescription = null, modifier = Modifier.size(14.dp))
                 Spacer(modifier = Modifier.width(4.dp))
-                Text("Copy Package", fontSize = 12.sp)
+                Text("Copy Package", fontSize = 12.sp, textAlign = TextAlign.Center, softWrap = true)
             }
-            OutlinedButton(onClick = onCopyFingerprint, modifier = Modifier.weight(1f).height(40.dp)) {
+            OutlinedButton(
+                onClick = onCopyFingerprint,
+                modifier = Modifier.weight(1f).heightIn(min = 40.dp),
+                contentPadding = PaddingValues(horizontal = 6.dp, vertical = 6.dp)
+            ) {
                 Icon(Icons.Default.ContentCopy, contentDescription = null, modifier = Modifier.size(14.dp))
                 Spacer(modifier = Modifier.width(4.dp))
-                Text("Copy Fingerprint", fontSize = 12.sp)
+                Text("Copy Fingerprint", fontSize = 12.sp, textAlign = TextAlign.Center, softWrap = true)
             }
         }
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Button(onClick = onOpenCloudConsole, modifier = Modifier.weight(1f).height(40.dp)) {
+            Button(
+                onClick = onOpenCloudConsole,
+                modifier = Modifier.weight(1f).heightIn(min = 40.dp),
+                contentPadding = PaddingValues(horizontal = 6.dp, vertical = 6.dp)
+            ) {
                 Icon(Icons.AutoMirrored.Filled.Launch, contentDescription = null, modifier = Modifier.size(14.dp))
                 Spacer(modifier = Modifier.width(4.dp))
-                Text("Cloud Console", fontSize = 12.sp)
+                Text("Cloud Console", fontSize = 12.sp, textAlign = TextAlign.Center, softWrap = true)
             }
-            Button(onClick = onEnableDriveApi, modifier = Modifier.weight(1f).height(40.dp)) {
+            Button(
+                onClick = onEnableDriveApi,
+                modifier = Modifier.weight(1f).heightIn(min = 40.dp),
+                contentPadding = PaddingValues(horizontal = 6.dp, vertical = 6.dp)
+            ) {
                 Icon(Icons.AutoMirrored.Filled.Launch, contentDescription = null, modifier = Modifier.size(14.dp))
                 Spacer(modifier = Modifier.width(4.dp))
-                Text("Enable Drive API", fontSize = 12.sp)
+                Text("Enable Drive API", fontSize = 12.sp, textAlign = TextAlign.Center, softWrap = true)
             }
         }
 
@@ -553,13 +601,21 @@ private fun Step4AndroidOAuth(
         )
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            OutlinedButton(onClick = onBack) {
+            OutlinedButton(
+                onClick = onBack,
+                modifier = Modifier.heightIn(min = 40.dp),
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+            ) {
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null, modifier = Modifier.size(18.dp))
                 Spacer(modifier = Modifier.width(4.dp))
-                Text("Back")
+                Text("Back", textAlign = TextAlign.Center, softWrap = true)
             }
-            Button(onClick = onNext) {
-                Text("Review")
+            Button(
+                onClick = onNext,
+                modifier = Modifier.heightIn(min = 40.dp),
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+            ) {
+                Text("Review", textAlign = TextAlign.Center, softWrap = true)
                 Spacer(modifier = Modifier.width(4.dp))
                 Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null, modifier = Modifier.size(18.dp))
             }
@@ -669,29 +725,36 @@ private fun Step5ReviewFinish(
 
         OutlinedButton(
             onClick = onImportClick,
-            modifier = Modifier.fillMaxWidth().height(42.dp)
+            modifier = Modifier.fillMaxWidth().heightIn(min = 42.dp),
+            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
         ) {
             Icon(Icons.Default.UploadFile, contentDescription = null, modifier = Modifier.size(18.dp))
             Spacer(modifier = Modifier.width(6.dp))
-            Text("Import google-services.json")
+            Text("Import google-services.json", textAlign = TextAlign.Center, softWrap = true)
         }
 
         val context = LocalContext.current
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            OutlinedButton(onClick = onBack) {
+            OutlinedButton(
+                onClick = onBack,
+                modifier = Modifier.heightIn(min = 40.dp),
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+            ) {
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null, modifier = Modifier.size(18.dp))
                 Spacer(modifier = Modifier.width(4.dp))
-                Text("Back")
+                Text("Back", textAlign = TextAlign.Center, softWrap = true)
             }
             Button(
                 onClick = {
                     onFinish()
                 },
+                modifier = Modifier.heightIn(min = 40.dp),
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
                 Icon(Icons.Default.Save, contentDescription = null, modifier = Modifier.size(18.dp))
                 Spacer(modifier = Modifier.width(6.dp))
-                Text("Finish & Save")
+                Text("Finish & Save", textAlign = TextAlign.Center, softWrap = true)
             }
         }
     }

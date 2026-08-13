@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import io.github.juby210.swiftbackupprem.ui.MainViewModel
 import io.github.juby210.swiftbackupprem.ui.component.AboutScreen
@@ -277,21 +278,23 @@ class MainActivity : ComponentActivity() {
                                                     Button(
                                                         onClick = { AppUtils.forceStopSwiftBackup(context) },
                                                         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
-                                                        modifier = Modifier.weight(1f).height(46.dp)
+                                                        modifier = Modifier.weight(1f).heightIn(min = 46.dp),
+                                                        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 6.dp)
                                                     ) {
                                                         Icon(Icons.Default.PowerSettingsNew, contentDescription = null, modifier = Modifier.size(18.dp))
                                                         Spacer(Modifier.width(6.dp))
-                                                        Text("Force Stop", fontWeight = FontWeight.Bold)
+                                                        Text("Force Stop", fontWeight = FontWeight.Bold, textAlign = TextAlign.Center, softWrap = true)
                                                     }
 
                                                     Button(
                                                         onClick = { AppUtils.openSwiftBackup(context) },
                                                         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
-                                                        modifier = Modifier.weight(1f).height(46.dp)
+                                                        modifier = Modifier.weight(1f).heightIn(min = 46.dp),
+                                                        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 6.dp)
                                                     ) {
                                                         Icon(Icons.AutoMirrored.Filled.Launch, contentDescription = null, modifier = Modifier.size(18.dp))
                                                         Spacer(Modifier.width(6.dp))
-                                                        Text("Open App", fontWeight = FontWeight.Bold)
+                                                        Text("Open App", fontWeight = FontWeight.Bold, textAlign = TextAlign.Center, softWrap = true)
                                                     }
                                                 }
                                             }
