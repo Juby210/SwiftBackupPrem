@@ -17,7 +17,6 @@ class MainViewModel : ViewModel() {
             try {
                 contentResolver.openOutputStream(uri)?.use { outputStream ->
                     val json = JSONObject().apply {
-                        put("enablePremiumFeatures", prefs.enablePremiumFeatures)
                         put("customFirebaseApp", prefs.customFirebaseApp)
                         put("googleAppId", prefs.googleAppId)
                         put("googleApiKey", prefs.googleApiKey)
@@ -41,10 +40,7 @@ class MainViewModel : ViewModel() {
                     val jsonStr = inputStream.bufferedReader().use { it.readText() }
                     val json = JSONObject(jsonStr)
 
-                    if (json.has("enablePremiumFeatures") || json.has("customFirebaseApp") || json.has("googleAppId")) {
-                        if (json.has("enablePremiumFeatures")) {
-                            prefs.enablePremiumFeatures = json.optBoolean("enablePremiumFeatures", true)
-                        }
+                    if (json.has("customFirebaseApp") || json.has("googleAppId")) {
                         if (json.has("customFirebaseApp")) {
                             prefs.customFirebaseApp = json.optBoolean("customFirebaseApp", true)
                         }

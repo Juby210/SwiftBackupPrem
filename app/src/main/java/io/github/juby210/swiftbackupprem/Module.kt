@@ -136,30 +136,28 @@ class Module : IXposedHookLoadPackage {
             }
         })
 
-        if (prefs.enablePremiumFeatures) {
-            try {
-                XposedHelpers.findAndHookMethod("org.swiftapps.swiftbackup.cloud.d", cl, "d", XC_MethodReplacement.returnConstant(java.lang.Boolean.FALSE))
-            } catch (_: Throwable) {}
+        try {
+            XposedHelpers.findAndHookMethod("org.swiftapps.swiftbackup.cloud.d", cl, "d", XC_MethodReplacement.returnConstant(java.lang.Boolean.FALSE))
+        } catch (_: Throwable) {}
 
-            try {
-                XposedHelpers.findAndHookMethod("org.swiftapps.swiftbackup.common.V", cl, "getG", XC_MethodReplacement.returnConstant(java.lang.Boolean.TRUE))
-            } catch (_: Throwable) {}
+        try {
+            XposedHelpers.findAndHookMethod("org.swiftapps.swiftbackup.common.V", cl, "getG", XC_MethodReplacement.returnConstant(java.lang.Boolean.TRUE))
+        } catch (_: Throwable) {}
 
-            try {
-                XposedHelpers.findAndHookMethod("org.swiftapps.swiftbackup.common.V", cl, "getA", XC_MethodReplacement.returnConstant(java.lang.Boolean.TRUE))
-            } catch (t: Throwable) {
-                Log.e("SBP", "Failed to hook V.getA", t)
-            }
-
-            try {
-                val vClassA = cl.loadClass("org.swiftapps.swiftbackup.common.V\$a")
-                for (m in vClassA.declaredMethods) {
-                    if (m.name == "invoke") {
-                        XposedBridge.hookMethod(m, XC_MethodReplacement.returnConstant(java.lang.Boolean.TRUE))
-                        break
-                    }
-                }
-            } catch (_: Throwable) {}
+        try {
+            XposedHelpers.findAndHookMethod("org.swiftapps.swiftbackup.common.V", cl, "getA", XC_MethodReplacement.returnConstant(java.lang.Boolean.TRUE))
+        } catch (t: Throwable) {
+            Log.e("SBP", "Failed to hook V.getA", t)
         }
+
+        try {
+            val vClassA = cl.loadClass("org.swiftapps.swiftbackup.common.V\$a")
+            for (m in vClassA.declaredMethods) {
+                if (m.name == "invoke") {
+                    XposedBridge.hookMethod(m, XC_MethodReplacement.returnConstant(java.lang.Boolean.TRUE))
+                    break
+                }
+            }
+        } catch (_: Throwable) {}
     }
 }

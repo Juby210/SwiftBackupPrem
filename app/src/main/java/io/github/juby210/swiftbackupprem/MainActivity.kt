@@ -211,21 +211,6 @@ class MainActivity : ComponentActivity() {
                                                         .fillMaxWidth()
                                                         .padding(horizontal = 16.dp, vertical = 6.dp),
                                                     shape = RoundedCornerShape(16.dp),
-                                                    colors = CardDefaults.elevatedCardColors(containerColor = MaterialTheme.colorScheme.surface)
-                                                ) {
-                                                    SettingsSwitch(
-                                                        label = "Enable premium features",
-                                                        secondaryLabel = "Unlocks Swift Backup Premium capabilities",
-                                                        pref = prefs.enablePremiumFeatures,
-                                                        onPrefChange = { prefs.enablePremiumFeatures = it }
-                                                    )
-                                                }
-
-                                                ElevatedCard(
-                                                    modifier = Modifier
-                                                        .fillMaxWidth()
-                                                        .padding(horizontal = 16.dp, vertical = 6.dp),
-                                                    shape = RoundedCornerShape(16.dp),
                                                     colors = CardDefaults.elevatedCardColors(
                                                         containerColor = if (prefs.customFirebaseApp)
                                                             MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
