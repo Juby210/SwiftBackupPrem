@@ -2,6 +2,7 @@ package io.github.juby210.swiftbackupprem
 
 import android.content.Context
 import android.util.Log
+import androidx.annotation.Keep
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XC_MethodReplacement
@@ -11,6 +12,7 @@ import de.robv.android.xposed.XposedHelpers
 import de.robv.android.xposed.callbacks.XC_LoadPackage
 import io.github.juby210.swiftbackupprem.util.PreferencesManager
 
+@Keep
 class Module : IXposedHookLoadPackage {
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
         if (lpparam.packageName != Consts.packageName) return

@@ -1,18 +1,17 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 }
 
 android {
     namespace 'io.github.juby210.swiftbackupprem'
-    compileSdk 34
+    compileSdk 37
     ndkVersion '25.1.8937393'
 
     defaultConfig {
         applicationId 'io.github.juby210.swiftbackupprem'
         minSdk 27
-        targetSdk 34
+        targetSdk 37
         versionCode 210
         versionName '2.1.0'
     }
@@ -34,9 +33,6 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = '17'
     }
     buildFeatures {
         buildConfig true

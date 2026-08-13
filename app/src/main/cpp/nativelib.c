@@ -30,7 +30,7 @@ void on_library_loaded(const char *name, void *handle) {
     }
 }
 
-NativeOnModuleLoaded native_init(const NativeAPIEntries *entries) {
+JNIEXPORT __attribute__((visibility("default"))) NativeOnModuleLoaded native_init(const NativeAPIEntries *entries) {
     if (!entries) return NULL;
     hook_func = entries->hook_func;
     return on_library_loaded;
