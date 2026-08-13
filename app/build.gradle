@@ -13,14 +13,15 @@ android {
         applicationId 'io.github.juby210.swiftbackupprem'
         minSdk 27
         targetSdk 34
-        versionCode 205
-        versionName '2.0.5'
+        versionCode 210
+        versionName '2.1.0'
     }
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
