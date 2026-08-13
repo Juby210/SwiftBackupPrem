@@ -262,7 +262,7 @@ fun AboutScreen() {
 
         // Repository Action Button
         Button(
-            onClick = { uriHandler.openUri("https://github.com/s1ddhants1/SwiftBackupPrem") },
+            onClick = { uriHandler.openUri("https://github.com/Juby210/SwiftBackupPrem") },
             modifier = Modifier.fillMaxWidth().height(48.dp)
         ) {
             Icon(Icons.Default.Code, contentDescription = null, modifier = Modifier.size(18.dp))
