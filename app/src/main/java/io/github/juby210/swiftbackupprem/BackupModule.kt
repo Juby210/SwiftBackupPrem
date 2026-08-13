@@ -2,6 +2,7 @@ package io.github.juby210.swiftbackupprem
 
 import android.content.Context
 import android.util.Log
+import androidx.annotation.Keep
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XposedBridge
 import io.github.juby210.swiftbackupprem.util.PreferencesManager
@@ -9,6 +10,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
 
+@Keep
 fun hookBackupApk(cl: ClassLoader, ctx: Context, customFirebaseApp: Boolean, prefs: PreferencesManager) {
     val bClass = backupApkClass ?: return
     val pClass = pathsClass ?: return
@@ -54,7 +56,7 @@ fun hookBackupApk(cl: ClassLoader, ctx: Context, customFirebaseApp: Boolean, pre
             val apkFile = File(dir, "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE}).apk")
             if (!apkFile.exists()) {
                 try {
-                    File(ctx.packageManager.getPackageInfo(BuildConfig.APPLICATION_ID, 0).applicationInfo.sourceDir).copyTo(apkFile, true)
+                    File(ctx.packageManager.getPackageInfo(BuildConfig.APPLICATION_ID, 0).applicationInfo!!.sourceDir).copyTo(apkFile, true)
                 } catch (t: Throwable) {
                     Log.e("SBP", "Failed copying module APK", t)
                 }

@@ -10,3 +10,4 @@ build
 local.properties
 release
 release.keystore
+.kotlin

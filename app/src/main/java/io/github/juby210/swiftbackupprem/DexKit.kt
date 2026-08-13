@@ -4,6 +4,7 @@ package io.github.juby210.swiftbackupprem
 
 import android.content.Context
 import android.util.Log
+import androidx.annotation.Keep
 import org.luckypray.dexkit.DexKitBridge
 import java.lang.reflect.Modifier
 
@@ -11,13 +12,17 @@ private val classesClientId = mapOf(561 to "kf.s0", 569 to "rf.r0", 590 to "eh.u
 private val classesBackupApk = mapOf(561 to "org.swiftapps.swiftbackup.common.w1", 569 to "org.swiftapps.swiftbackup.common.n2", 590 to "org.swiftapps.swiftbackup.common.c2", 620 to "defpackage.qm")
 private val classesPaths = mapOf(561 to "me.b", 569 to "te.c", 590 to "org.swiftapps.swiftbackup.a", 620 to "defpackage.ry5")
 
+@Keep
 @JvmField
 var clientIdClass: Class<*>? = null
+@Keep
 @JvmField
 var backupApkClass: Class<*>? = null
+@Keep
 @JvmField
 var pathsClass: Class<*>? = null
 
+@Keep
 @Suppress("DEPRECATION")
 fun findObfuscatedClasses(ctx: Context, cl: ClassLoader, sourceDir: String) {
     val ver = Integer.valueOf(ctx.packageManager.getPackageInfo(Consts.packageName, 0).versionCode)
