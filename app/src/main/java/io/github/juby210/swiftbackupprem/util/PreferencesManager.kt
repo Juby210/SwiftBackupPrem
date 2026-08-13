@@ -38,12 +38,12 @@ class PreferencesManager(private val prefs: SharedPreferences) {
         setter = ::putString
     )
 
-    @Suppress("SameParameterValue")
     private fun booleanPreference(
-        key: String
+        key: String,
+        defaultValue: Boolean = false
     ) = Preference(
         key = key,
-        defaultValue = false,
+        defaultValue = defaultValue,
         getter = ::getBoolean,
         setter = ::putBoolean
     )
@@ -56,5 +56,6 @@ class PreferencesManager(private val prefs: SharedPreferences) {
     var projectId by stringPreference(Consts.projectId)
     var clientId by stringPreference(Consts.oauthClientId)
 
+    var enablePremiumFeatures by booleanPreference("enable_premium_features", true)
     var customFirebaseApp by booleanPreference("custom_firebase_app")
 }

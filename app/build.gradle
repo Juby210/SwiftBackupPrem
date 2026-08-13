@@ -1,0 +1,63 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+}
+
+android {
+    namespace 'io.github.juby210.swiftbackupprem'
+    compileSdk 34
+    ndkVersion '25.1.8937393'
+
+    defaultConfig {
+        applicationId 'io.github.juby210.swiftbackupprem'
+        minSdk 27
+        targetSdk 34
+        versionCode 205
+        versionName '2.0.5'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path 'src/main/cpp/CMakeLists.txt'
+            version '3.22.1'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        buildConfig true
+        compose true
+        resValues false
+    }
+}
+
+dependencies {
+    compileOnly files('libs/api-82.jar')
+    implementation libs.dexkit
+
+    // AndroidX
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.activity.compose
+    implementation libs.androidx.lifecycle.viewmodel.compose
+    implementation libs.androidx.lifecycle.runtime.compose
+
+    // Compose
+    implementation platform(libs.androidx.compose.bom)
+    implementation libs.androidx.compose.ui
+    implementation libs.androidx.compose.ui.tooling
+    implementation libs.androidx.compose.material3
+    implementation libs.androidx.compose.material.icons.extended
+}

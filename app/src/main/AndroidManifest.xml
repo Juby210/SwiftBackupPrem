@@ -2,12 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <queries>
+        <package android:name="org.swiftapps.swiftbackup" />
+    </queries>
+
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="SwiftBackupPrem"
         android:supportsRtl="true"
         android:multiArch="true"
-        android:extractNativeLibs="false"
         tools:ignore="MissingApplicationIcon">
         <activity android:name=".MainActivity" android:exported="true" android:theme="@android:style/Theme.Material.NoActionBar">
             <intent-filter>
